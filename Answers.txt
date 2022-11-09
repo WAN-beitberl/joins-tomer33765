@@ -1,0 +1,57 @@
+1. 
+SELECT customer.cust_name, 
+       salesman.name, salesman.city
+  FROM salesman, customer
+ WHERE salesman.city = customer.city;
+
+2.
+SELECT cust_name, salesman.name 
+  FROM customer, salesman
+ WHERE customer.salesman_id = salesman.salesman_id;
+
+3.
+SELECT ord_no, cust_name, 
+	 orders.customer_id, orders.salesman_id
+  FROM customer, salesman, orders
+ WHERE salesman.city != customer.city
+   AND customer.customer_id = orders.customer_id
+   AND salesman.salesman_id = orders.salesman_id;
+
+4.
+SELECT ord_no, cust_name
+  FROM customer, orders
+ WHERE customer.customer_id = orders.customer_id;
+
+5.
+SELECT cust_name AS "Customer",
+       grade AS "Grade",
+       orders.ord_no AS "Order No"
+  FROM orders, salesman, customer
+ WHERE orders.customer_id = customer.customer_id
+   AND orders.salesman_id = salesman.salesman_id
+   AND salesman.city IS NOT NULL
+   AND customer.grade IS NOT NULL;
+
+6.
+SELECT cust_name AS "Customer",
+       customer.city AS "City", 
+       salesman.name, salesman.commission
+  FROM salesman, customer
+ WHERE customer.salesman_id = salesman.salesman_id
+   AND salesman.commission >= 0.12
+   AND salesman.commission <= 0.14;
+
+7.
+SELECT cust_name, ord_no,
+       salesman.commission AS "Commission%",
+       salesman.commission*purch_amt AS "Commission"
+  FROM salesman, customer, orders
+ WHERE orders.customer_id = customer.customer_id
+   AND orders.salesman_id = salesman.salesman_id
+   AND grade >= 200;
+
+8.
+SELECT *
+  FROM customer, orders
+WHERE customer.customer_id = orders.customer_id 
+  AND orders.ord_date = '2012-10-05';
